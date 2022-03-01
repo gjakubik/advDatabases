@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+#Create the tables
+sqlplus gjakubik/gjakubik <<EOF
+@create/create_tables
+exit
+EOF
+
+#Remove bad and log files so all are fresh
+rm log/* bad/*
+
+#Use sqlldr and control scripts to load data
+sqlldr userid=gjakubik/gjakubik control=ctl/customer.ctl log=log/customer.log bad=bad/customer.bad
+sqlldr userid=gjakubik/gjakubik control=ctl/manufacturer.ctl log=log/manufacturer.log bad=bad/manufacturer.bad
+sqlldr userid=gjakubik/gjakubik control=ctl/product.ctl log=log/product.log bad=bad/product.bad
+sqlldr userid=gjakubik/gjakubik control=ctl/salesperson.ctl log=log/salesperson.log bad=bad/salesperson.bad
+sqlldr userid=gjakubik/gjakubik control=ctl/sale.ctl log=log/sale.log bad=bad/sale.bad
+
+#add integrity constraints on salesperson
+sqlplus gjakubik/gjakubik <<EOF
+alter table salesperson
+	add foreign key (manager_id) references salesperson(salpers_id);
+exit
+EOF

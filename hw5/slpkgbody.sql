@@ -22,10 +22,11 @@ is
     is
         tot product.price%type;
     begin
-        select sum(slpkg.get_transaction_total(sale.sale_id)) 
+        select sum(sale.qty * product.price) 
         into tot
-        from sale
+        from sale, product
         where sale.cust_id = id
+        and sale.prod_id = product.prod_id;
     exception
         when no_data_found then
             dbms_output.put_line('getCustomerTotal error: ' || id || ' not found');

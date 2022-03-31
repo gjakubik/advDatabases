@@ -6,6 +6,6 @@ is
         return product.price%type;
     function get_cust_name (id customer.cust_id%type)
         return customer.cust_name%type;
-    procedure transaction_list (cid customer.cust_id%type);
+    -- procedure transaction_list (cid customer.cust_id%type);
 end slpkg;
 /

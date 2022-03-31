@@ -53,7 +53,7 @@ is
     is
         cursor trans_c (id customer.cust_id%type)
         is
-            select s.date, sp.salpers_name, p.prod_desc, s.qty, s.qty * p.price
+            select distinct s.date, sp.salpers_name, p.prod_desc, s.qty, s.qty * p.price
             from customer c, sale s, product p, salesperson sp
             where c.cust_id = id
             and c.cust_id = s.cust_id

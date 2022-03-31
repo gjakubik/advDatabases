@@ -1,6 +1,6 @@
 create or replace package body slpkg
 is
-    function getTransactionTotal(id sale.sale_id%type)
+    function get_transaction_total(id sale.sale_id%type)
         return product.price%type;
     is
         tot product.price%type;
@@ -17,12 +17,12 @@ is
             return null;
     end;
 
-    function getCustomerTotal(id customer.cust_id%type)
+    function get_customer_total(id customer.cust_id%type)
         return product.price%type;
     is
         tot product.price%type;
     begin
-        select sum(getTransactionTotal(sale.sale_id)) 
+        select sum(slpkg.get_transaction_total(sale.sale_id)) 
         into tot
         from sale
         where sale.cust_id = id
@@ -32,7 +32,7 @@ is
             return null;
     end;
 
-    function getCustName(id customer.cust_id%type)
+    function get_cust_name(id customer.cust_id%type)
         return customer.cust_name%type;
     is
         name customer.cust_name%type;
@@ -48,7 +48,7 @@ is
             return null;
     end;
 
-    procedure transactionList(cid customer.cust_id%type)
+    procedure transaction_list(cid customer.cust_id%type)
     is
         cursor trans_c (id customer.cust_id%type)
         is

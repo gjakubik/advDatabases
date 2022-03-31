@@ -1,7 +1,7 @@
 create or replace package body slpkg
 is
     function get_transaction_total(id sale.sale_id%type)
-        return product.price%type;
+        return product.price%type
     is
         tot product.price%type;
     begin
@@ -18,7 +18,7 @@ is
     end;
 
     function get_customer_total(id customer.cust_id%type)
-        return product.price%type;
+        return product.price%type
     is
         tot product.price%type;
     begin
@@ -33,7 +33,7 @@ is
     end;
 
     function get_cust_name(id customer.cust_id%type)
-        return customer.cust_name%type;
+        return customer.cust_name%type
     is
         name customer.cust_name%type;
     begin

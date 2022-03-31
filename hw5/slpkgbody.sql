@@ -41,7 +41,7 @@ is
         select cust_name
         into name
         from customer
-        where cust_id = id;
+        where customer.cust_id = id;
         return name;
     exception
         when no_data_found then

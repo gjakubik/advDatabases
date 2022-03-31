@@ -80,7 +80,7 @@ is
             fetch trans_c into sdate, sname, pdesc, sqty, stot;
             exit when trans_c%notfound;
             counter := counter + 1;
-            dbms_output.put_line('--> [' || sdate '] ' || sqty || ' ' || pdesc || ' from ' || sname || '\tTotal: ' || stot);
+            dbms_output.put_line('--> \[' || sdate '\] ' || sqty || ' ' || pdesc || ' from ' || sname || '\tTotal: ' || stot);
         end loop;
         close trans_c
         if counter = 0 then

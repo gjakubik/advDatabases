@@ -49,51 +49,51 @@ is
             return null;
     end;
 
-    procedure transaction_list(cid customer.cust_id%type)
-    is
-        cursor trans_c (id customer.cust_id%type)
-        is
-            select distinct s.date, sp.salpers_name, p.prod_desc, s.qty, s.qty * p.price
-            from customer c, sale s, product p, salesperson sp
-            where c.cust_id = id
-            and c.cust_id = s.cust_id
-            and p.prod_id = s.prod_id
-            and sp.salpers_id = s.salpers_id;
+    -- procedure transaction_list(cid customer.cust_id%type)
+    -- is
+    --     cursor trans_c (id customer.cust_id%type)
+    --     is
+    --         select distinct s.date, sp.salpers_name, p.prod_desc, s.qty, s.qty * p.price
+    --         from customer c, sale s, product p, salesperson sp
+    --         where c.cust_id = id
+    --         and c.cust_id = s.cust_id
+    --         and p.prod_id = s.prod_id
+    --         and sp.salpers_id = s.salpers_id;
     
-    cname customer.cust_name%type;
-    sdate sale.date%type;
-    sname salesperson.salpers_name%type;
-    pdesc product.prod_desc%type;
-    sqty sale.qty%type;
-    stot product.price%type;
-    ctot product.price%type;
-    counter binary_integer := 0;
+    -- cname customer.cust_name%type;
+    -- sdate sale.date%type;
+    -- sname salesperson.salpers_name%type;
+    -- pdesc product.prod_desc%type;
+    -- sqty sale.qty%type;
+    -- stot product.price%type;
+    -- ctot product.price%type;
+    -- counter binary_integer := 0;
 
-    notrans exception;
+    -- notrans exception;
 
-    begin
-        select slpkg.getCustName(cid) from dual into cname;
-        dbms_output.put_line('Customer: ' || cname);
+    -- begin
+    --     select slpkg.getCustName(cid) from dual into cname;
+    --     dbms_output.put_line('Customer: ' || cname);
         
-        dbms_output.put_line('Transactions:');
-        open trans_c(cid);
-        loop
-            fetch trans_c into sdate, sname, pdesc, sqty, stot;
-            exit when trans_c%notfound;
-            counter := counter + 1;
-            dbms_output.put_line('--> ''[' || sdate '''] ' || sqty || ' ' || pdesc || ' from ' || sname || '\tTotal: ' || stot);
-        end loop;
-        close trans_c
-        if counter = 0 then
-            raise notrans;
-        end if;
+    --     dbms_output.put_line('Transactions:');
+    --     open trans_c(cid);
+    --     loop
+    --         fetch trans_c into sdate, sname, pdesc, sqty, stot;
+    --         exit when trans_c%notfound;
+    --         counter := counter + 1;
+    --         dbms_output.put_line('--> ''[' || sdate '''] ' || sqty || ' ' || pdesc || ' from ' || sname || '\tTotal: ' || stot);
+    --     end loop;
+    --     close trans_c
+    --     if counter = 0 then
+    --         raise notrans;
+    --     end if;
 
-        exception
-            when notrans then
-            dbms_output.put_line('no transactions found');
-            when no_data_found then
-            dbms_output.put_line('customer id ' || cid || ' not found');
-    end;
+    --     exception
+    --         when notrans then
+    --         dbms_output.put_line('no transactions found');
+    --         when no_data_found then
+    --         dbms_output.put_line('customer id ' || cid || ' not found');
+    -- end;
 
     end slpkg;
     /

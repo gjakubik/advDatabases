@@ -1,4 +1,4 @@
-create or replace package body salepack
+create or replace package body slpkg
 is
     function getTransactionTotal(id sale.sale_id%type)
         return product.price%type;
@@ -94,5 +94,5 @@ is
             dbms_output.put_line('customer id ' || cid || ' not found');
     end;
 
-    end salepack;
+    end slpkg;
     /

@@ -5,5 +5,5 @@ is
   function getCustomerTotal (id customer.cust_id%type)
     return product.price%type;
   procedure transactionList (cid customer.cust_id%type);
-end salepack;
+end slpkg;
 /

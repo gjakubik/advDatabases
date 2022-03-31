@@ -33,7 +33,7 @@ is
             return null;
     end;
 
-    function get_cust_name(id customer.cust_id%type)
+    function getcname(id customer.cust_id%type)
         return customer.cust_name%type
     is
         name customer.cust_name%type;
@@ -41,12 +41,12 @@ is
         select cust_name
         into name
         from customer
-        where customer.cust_id = id;
+        where cust_id = id;
         return name;
     exception
         when no_data_found then
-            dbms_output.put_line('getCustName error: ' || id || ' not found');
-            return null;
+        dbms_output.put_line('getcname error: ' || id || ' not found');
+        return null;
     end;
 
     -- procedure transaction_list(cid customer.cust_id%type)

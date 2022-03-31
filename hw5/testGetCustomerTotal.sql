@@ -4,7 +4,7 @@ declare
     cname customer.cust_name%type;
     tot product.price%type;
 begin
-    cname := slpkg.get_cust_name(cid);
+    cname := slpkg.getcname(cid);
     tot := slpkg.get_customer_total(cid);
     if tot is null then
         dbms_output.put_line('Can''t find customer');
